@@ -33,4 +33,39 @@ Explanation
 Here, "aba" occurs twice, in the first and third string. The string "xzxb" occurs once in the fourth string, and "ab" does not occur at all.
 
 
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
 
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        //System.out.println(n);
+        String[] str1 = new String[n];
+        str1[0] = sc.nextLine();
+        for(int i=0;i<n;i++){
+            str1[i] = sc.nextLine();
+            //System.out.println(str1[i]);
+        }
+        int n2 = sc.nextInt();
+        String[] str2 = new String[n2];
+        str2[0] = sc.nextLine();
+        for(int i=0;i<n2;i++){
+            str2[i] = sc.nextLine();
+        }
+        for(int i=0;i<n2;i++){
+            int count = 0;
+            for(int j=0;j<n;j++){
+                if(str2[i].equals(str1[j])){
+                    count++;    
+                }
+            }
+            System.out.println(count);
+        }
+    }
+}
