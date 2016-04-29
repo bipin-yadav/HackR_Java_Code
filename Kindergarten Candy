@@ -1,0 +1,46 @@
+Kindergarten Candy
+Alice is a kindergarten teacher. She wants to give some candy to the children in
+her class. The children sit in a single row, and each child has a numeric score that
+reflects his or her performance in the class. Alice wants to give at least 1 piece of
+candy to each child. If two children sit next to each other, then the one with the
+higher score must get more pieces. Alice wants to save money, so she needs to
+minimize the total number of pieces of candy.
+Constraints
+1 ≤ N ≤ 10
+1 ≤ rating ≤ 10 where 1 ≤ i ≤ N
+Input Format
+The first line of the input is an integer N, the number of children in Alice's class.
+Each of the following N lines contains an integer that indicates the performance
+score of each child.
+Output Format
+Output a single line containing the least number of pieces of candy that Alice
+would need to distribute without breaking her rules.
+Sample Input #00
+3
+1
+2
+2
+Sample Output #00
+4
+
+
+
+/*
+ * Complete the function below.
+ */
+
+    static int distributeCandy(int[] score) {
+        int m = score.length;
+        int[] left = new int[m];
+        int[] right = new int[m];
+        int candies = 0;
+        left[0] = 1;
+        for (int i = 1; i < m; i++)
+            left[i] = score[i] > score[i - 1] ? left[i - 1] + 1 : 1;
+        right[m - 1] = 1;
+        for (int i = m - 2; i >= 0; i--)
+            right[i] = score[i] > score[i + 1] ? right[i + 1] + 1 : 1;
+        for (int i = 0; i < m; i++)
+            candies += Math.max(left[i], right[i]);
+        return candies;
+    }
