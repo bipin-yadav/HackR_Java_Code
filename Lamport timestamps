@@ -1,0 +1,24 @@
+The algorithm of Lamport timestamps is a simple algorithm used to determine the order of events in a distributed computer system. As different nodes or processes will typically not be perfectly synchronized, this algorithm is used to provide a partial ordering of events with minimal overhead, and conceptually provide a starting point for the more advanced vector clock method. Lamport invented a simple mechanism by which the happened-before ordering can be captured numerically. A Lamport logical clock is an incrementing software counter maintained in each process.
+Given a system with N processes. Initially you are given the integral timestamp wherein each of them comes in for execution. The interesting thing about the system is that after a process with a timestamp ti is executed, it returns again at a timestamp 2 x ti. The resources provided are enough for only the first K processes to be executed. Find the sum of the timestamps of the processes that are executed.
+Input:
+First line contains an integer T. T test cases follow.
+First line of each test case contains two space-separated integers N and K.
+Second line of each test case contains N space-separated integers,the initial timestamps of the processes.
+Output:
+Print the answer to each test case in a new line.
+Constraints:
+1 ≤ T ≤ 10
+1 ≤ N ≤ 105
+0 ≤ K ≤ 1000
+1 ≤ ti ≤ 100
+SAMPLE INPUT
+ 
+1
+5 3
+2 9 7 3 5
+SAMPLE OUTPUT
+ 
+9
+Explanation
+3 processes can be executed. The 1st process is executed with timestamp=2, the 4th with timestamp=3 and the 1st is executed as it returns at timestamp=4. Hence, sum of timestamps = 9.
+ 
