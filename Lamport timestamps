@@ -22,3 +22,88 @@ SAMPLE OUTPUT
 Explanation
 3 processes can be executed. The 1st process is executed with timestamp=2, the 4th with timestamp=3 and the 1st is executed as it returns at timestamp=4. Hence, sum of timestamps = 9.
  
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+class TestClass {
+	public static void main(String args[]) throws Exception {
+		FastScanner in = new FastScanner(System.in);
+		int T = in.nextInt();
+		int[] numbers;
+		for (int i = 0; i < T; ++i) {
+			int N = in.nextInt();
+			int K = in.nextInt();
+			numbers = new int[N];
+			for (int q = 0; q < N; ++q) {
+				numbers[q] = in.nextInt();				
+			}
+			System.out.println(findNumber(numbers, K));
+		}
+		
+	}
+
+	private static int findNumber(int[] inputArray, int K) {
+		int ans = 0, count = 0;
+		int index = getMinValue(inputArray);
+		int time = inputArray[index];
+		
+		while(count < K){			
+			for (int i = 0; i < inputArray.length ; ++i) {
+				if(inputArray[i] <= time ){
+					inputArray[i] = 2*time;
+					ans = ans + time;
+					time++;
+					count++;
+					if(count == K){
+						break;
+					}
+				}				
+			}
+		}
+		return ans;
+	}
+	
+	//getting the miniumum value
+	public static int getMinValue(int[] array){  
+	     int minValue = array[0];  
+	     int min = 0;
+	     int i = 1;
+	     for(;i<array.length;i++){  
+	     if(array[i] < minValue){  
+	    	 minValue = array[i];  
+	    	 min = i;
+	        }  
+	     }  
+	    return min;  
+	}  
+
+	
+	static class FastScanner {
+		BufferedReader br;
+		StringTokenizer st;
+
+		public FastScanner(InputStream input) {
+			br = new BufferedReader(new InputStreamReader(input));
+			st = new StringTokenizer("");
+		}
+
+		public String next() throws IOException {
+			if (st.hasMoreTokens()) {
+				return st.nextToken();
+			} else {
+				st = new StringTokenizer(br.readLine());
+				return next();
+			}
+		}
+
+		public int nextInt() throws IOException {
+			return Integer.parseInt(next());
+		}
+	}
+}
+
+
+
