@@ -1,0 +1,53 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+import java.security.MessageDigest;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        String data = sn.nextLine();
+        Solution sj = new Solution();
+        sj.getSHA256Hash(data);
+        
+    }
+
+    /**
+     * Returns a hexadecimal encoded SHA-256 hash for the input String.
+     * @param data
+     * @return String
+     */
+    private void getSHA256Hash(String data) {
+        String result = null;
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(data.getBytes("UTF-8"));
+            bytesToHex(hash);
+            
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
+       
+    }
+    
+    /**
+     * Use javax.xml.bind.DatatypeConverter class in JDK to convert byte array
+     * to a hexadecimal string. Note that this generates hexadecimal in upper case.
+     * @param hash
+     * @return 
+     */
+    private void  bytesToHex(byte[] hash) {
+        //convert the byte to hex format method 2
+        StringBuffer hexString = new StringBuffer();
+    	for (int i=0;i<hash.length;i++) {
+    		String hex=Integer.toHexString(0xff & hash[i]);
+   	     	if(hex.length()==1) hexString.append('0');
+   	     	hexString.append(hex);
+    	}
+        System.out.println(hexString);
+        
+    }
+}
