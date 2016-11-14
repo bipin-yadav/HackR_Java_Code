@@ -1,0 +1,32 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String month = in.next();
+        String day = in.next();
+        String year = in.next();
+        Calendar cal = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month)-1,Integer.parseInt(day));
+        if(cal.getTime().toString().contains("Mon"))
+            System.out.print("MONDAY");
+        else if(cal.getTime().toString().contains("Tue"))
+            System.out.print("TUESDAY");
+        else if(cal.getTime().toString().contains("Wed"))
+            System.out.print("WEDNESDAY ");
+        else if(cal.getTime().toString().contains("Thu"))
+            System.out.print("THURSDAY");
+        else if(cal.getTime().toString().contains("Fri"))
+            System.out.print("FRIDAY");
+        else if(cal.getTime().toString().contains("Sat"))
+            System.out.print("SATURDAY");
+        else
+            System.out.print("SUNDAY");
+            
+        
+    }
+}
