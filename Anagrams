@@ -1,0 +1,53 @@
+Two strings,  and , are called anagrams if they contain all the same characters in the same frequencies. For example, the anagrams of CAT are CAT, ACT, TAC, TCA, ATC, and CTA.
+
+Complete the function in the editor. If  and  are case-insensitive anagrams, print "Anagrams"; otherwise, print "Not Anagrams" instead.
+
+Input Format
+
+The first line contains a string denoting . 
+The second line contains a string denoting .
+
+Constraints
+
+Strings  and  consist of English alphabetic characters.
+The comparison should NOT be case sensitive.
+Output Format
+
+Print "Anagrams" if  and  are case-insensitive anagrams of each other; otherwise, print "Not Anagrams" instead.
+
+Sample Input 0
+
+anagram
+margana
+Sample Output 0
+
+Anagrams
+Explanation 0
+
+Character	Frequency: anagram	Frequency: margana
+A or a	3	3
+G or g	1	1
+N or n	1	1
+M or m	1	1
+R or r	1	1
+
+The two strings contain all the same letters in the same frequencies, so we print "Anagrams".
+
+SOL:
+
+    static boolean isAnagram(String str1, String str2) {
+        // Complete the function
+        String s1 = str1.replaceAll("\\s", "");  
+        String s2 = str2.replaceAll("\\s", "");
+        boolean status = true;  
+        if (s1.length() != s2.length()) {  
+            status = false;  
+        } else {  
+            char[] ArrayS1 = s1.toLowerCase().toCharArray();  
+            char[] ArrayS2 = s2.toLowerCase().toCharArray();  
+            Arrays.sort(ArrayS1);  
+            Arrays.sort(ArrayS2);  
+            status = Arrays.equals(ArrayS1, ArrayS2);  
+        } 
+        return status;
+    }
