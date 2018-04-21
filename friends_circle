@@ -1,0 +1,47 @@
+    /*
+     * Complete the friendCircles function below.
+     */
+    static int friendCircles(String[] friends) {
+        int len = friends.length;
+        char[][] matrix = new char[len][len];
+        for (int i = 0; i < len; i++) {
+            matrix[i] = friends[i].toCharArray();
+        }
+        int n = matrix.length;
+        if (n == 1) {
+            return 1;
+        }
+      
+        boolean[] assigned = new boolean[n];
+        for (int i = 0; i < n; i++) {
+            assigned[i] = false;
+        }
+        int circles = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (assigned[i]) continue;
+            assigned[i] = true;         
+            for (int j = 0; j < matrix.length; j++) {
+                if (assigned[j]) continue;
+                if (i == j) continue;
+                if (matrix[i][j] == 'Y') {
+                    assigned[j] = true;
+                    updateInPlace(matrix, assigned, j);
+                }
+            }          
+            circles++;
+        }
+        return circles;
+    }
+
+    private static void updateInPlace(char[][] matrix, boolean[] assigned, int i) {
+        for (int j = 0; j < matrix.length; j++) {
+            if (assigned[j]) continue;
+            if (i == j) continue;
+            if (matrix[i][j] == 'Y') {
+                assigned[j] = true;
+                updateInPlace(matrix, assigned, j);
+            }
+        }
+    }
+
