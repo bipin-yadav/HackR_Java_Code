@@ -1,0 +1,27 @@
+
+
+    public static List<String> reformatDate(List<String> dates){
+    // Write your code here
+        List<String> result = new ArrayList();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d MMMM yyyy");
+        SimpleDateFormat finalDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        for(int i = 0; i < dates.size(); i++) {
+            String string = dates.get(i);
+            string = string.replaceFirst("[a-zA-Z]{2}", "");
+            try {
+                Date tempFormattedDate = simpleDateFormat.parse(string); 
+                String finalFormattedDate = finalDateFormat.format(tempFormattedDate);
+                result.add(finalFormattedDate);
+            } catch(ParseException pe) {
+                pe.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+}
+
+
+
+
+
