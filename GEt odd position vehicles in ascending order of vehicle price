@@ -1,0 +1,116 @@
+GEt odd position vehicles in ascending order of vehicle price 
+We recommend you take a quick tour of our editor before you proceed. The timer will pause up to 90 seconds for the tour.
+Create a class Vehicle with below attributes:
+int - number
+String - name
+double - price
+Make all the attributes private.Create corresponding getters and setters.
+Create a constructor which takes all parameters in the above sequence. The constructor should set the value of attributes to parameter values
+inside the constructor.
+Create a class Solution with main method
+Create a static method getOddPositionVehicle in the Solution class.
+This method will take array of Vehicle objects.
+This method returns an array with all elements in odd position in input array(first position is 0th element index in the array which should be
+considered as odd) after arranging them in ascending order of price.
+Create an array of n Vehicle objects in the main method reading values from console in sequence of attributes as above.
+The first number entered in console should be n.
+Display the result of getOddPositionVehicle where each line will display values from one object each.
+Refer to below example to understand input and output:
+Input:
+3
+1
+ciaz
+900000
+2
+BRV
+1000000
+3
+WRV
+500000
+Output:
+3 WRV 500000.0
+
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    public static void main(String args[]) throws Exception {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        List<Vehicle> vehicles = new ArrayList<>();
+        DecimalFormat f = new DecimalFormat("##.0");
+        for (int i = 0; i < N; i++) {
+            Vehicle vehicle = new Vehicle();
+            vehicle.setNumber(Integer.parseInt(br.readLine()));
+            vehicle.setName(br.readLine());
+            String price = br.readLine();
+            double res = Double.valueOf(price);
+            vehicle.setPrice(res);
+            vehicles.add(vehicle);
+        }
+        Collections.reverse(vehicles);
+        for (int i = 0; i < N; i++) {
+            if (i % 2 == 0) {
+                System.out.println(vehicles.get(i).toString());
+            }
+        }
+
+    }
+
+    public static class Vehicle {
+        private String name;
+        private int number;
+        private Double price;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getNumber() {
+            return number;
+        }
+
+        public void setNumber(int number) {
+            this.number = number;
+        }
+
+        public Double getPrice() {
+            return price;
+        }
+
+        public void setPrice(Double price) {
+            this.price = price;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o)
+                return true;
+            if (!(o instanceof Vehicle))
+                return false;
+            Vehicle vehicle = (Vehicle) o;
+            return number == vehicle.number && Objects.equals(name, vehicle.name)
+                    && Objects.equals(price, vehicle.price);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(name, number, price);
+        }
+
+        @Override
+        public String toString() {
+
+            return number + " " + name + " " + price;
+        }
+    }
+}
