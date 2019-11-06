@@ -1,0 +1,98 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+import java.net.*;
+import com.google.gson.*;
+
+
+public class Main {
+  /*
+   * Complete the function below.
+   */
+  static int getNumberOfMovies(String substr) throws IOException {
+    /*
+     * Endpoint: "https://jsonmock.hackerrank.com/api/movies/search/?Title=substr"
+     */
+    int count = 0;
+    StringBuilder sb = new StringBuilder();
+    URLConnection urlConn = null;
+    InputStreamReader in = null;
+    try {
+      URL url = new URL("https://jsonmock.hackerrank.com/api/movies/search/?Title=maze");
+      urlConn = url.openConnection();
+      if (urlConn != null)
+        urlConn.setReadTimeout(60 * 1000);
+      if (urlConn != null && urlConn.getInputStream() != null) {
+        in = new InputStreamReader(urlConn.getInputStream());
+        BufferedReader bufferedReader = new BufferedReader(in);
+        if (bufferedReader != null) {
+          int cp;
+          while ((cp = bufferedReader.read()) != -1) {
+            sb.append((char) cp);
+          }
+
+          Gson gson = new Gson();
+          Application app = gson.fromJson(new String(sb), Application.class);
+          //System.out.println(app.getTotal());
+          bufferedReader.close();
+          count = app.getTotal();
+        }
+      }
+      in.close();
+    } catch (Exception e) {
+      // log
+    }
+    return count;
+  }
+
+  class Application {
+    private int page;
+    private int per_page;
+    private int total;
+    private int total_pages;
+    ArrayList<Object> data = new ArrayList<Object>();
+
+
+    // Getter Methods
+
+    public int getPage() {
+      return page;
+    }
+
+    public int getPer_page() {
+      return per_page;
+    }
+
+    public int getTotal() {
+      return total;
+    }
+
+    public int getTotal_pages() {
+      return total_pages;
+    }
+
+    // Setter Methods
+
+    public void setPage(int page) {
+      this.page = page;
+    }
+
+    public void setPer_page(int per_page) {
+      this.per_page = per_page;
+    }
+
+    public void setTotal(int total) {
+      this.total = total;
+    }
+
+    public void setTotal_pages(int total_pages) {
+      this.total_pages = total_pages;
+    }
+  }
+
+  public static void main(String[] args) throws IOException {
+    System.out.print(getNumberOfMovies("url"));
+  }
+}
