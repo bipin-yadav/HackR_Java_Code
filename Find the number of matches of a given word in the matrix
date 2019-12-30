@@ -33,11 +33,6 @@ public class CandidateCode {
         System.out.println(count); 
    }
 
-   @param input1 - size of the square matrix. 1<=N<=50
-     * @param input2  - An array of String {N String containing N upper case alphabets separated by #}
-     * @param input3 - Word to be searched.
-     * @return - Number of occurrences of the word in the matrix (an integer).
-
     public static int word_count(int input1, String[] input2, String input3) {
             int r = 0;
             StringBuilder diagonal1 = new StringBuilder("");
