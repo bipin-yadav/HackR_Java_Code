@@ -1,0 +1,37 @@
+
+Number of subarrays having sum exactly equal to k
+
+
+
+// you can also use imports, for example:
+import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int[] A) {
+        // write your code in Java SE 8
+        int n = A.length;
+        int sum = 0;
+        HashMap <Integer, Integer> prevSum = new HashMap<>();  
+        int res = 0;  
+        int currsum = 0;  
+        if (n >=100000 ) {
+            return -1;
+        }
+        for (int i = 0; i < n; i++) {  
+            currsum += A[i];  
+            if (currsum == sum)   
+                res++;          
+            if (prevSum.containsKey(currsum - sum))   
+                res += prevSum.get(currsum - sum);  
+            Integer count = prevSum.get(currsum); 
+            if (count == null) 
+                prevSum.put(currsum, 1); 
+            else
+                prevSum.put(currsum, count+1);  
+        }  
+        return res;          
+    }
+}
