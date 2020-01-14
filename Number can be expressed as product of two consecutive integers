@@ -1,0 +1,32 @@
+Number can be expressed as product of two consecutive integers
+
+
+
+// you can also use imports, for example:
+// import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int A, int B) {
+        // write your code in Java SE 8
+        int res = 0;
+        for (int i = A; i<=B; i++) {
+            if(check(i)) {
+                res++;
+            }
+        }
+        return res;
+    }
+    
+    static boolean check(int n) { 
+        int x = (int)(Math.sqrt(n)); 
+        if (x * (x + 1) == n) {
+            return true; 
+        }
+        else {
+            return false; 
+        }
+    } 
+}
